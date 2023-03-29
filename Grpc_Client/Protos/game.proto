@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+option csharp_namespace = "Grpc_Service";
+
+
+service Game {
+  rpc GetQuestion(QuestionRequest) returns (Question) {}
+  rpc SubmitAnswer(Answer) returns (AnswerResponse) {}
+  rpc RegisterUser(User) returns (GameStart) {}
+  rpc CheckForAnotherUser(GameStart) returns (GameStart) {}
+  rpc CheckForWinCondition(User) returns (GameEnd) {}
+  rpc FinishGame(CleanUsers) returns (CleanUsers) {}
+}
+
+message User {
+	int32 user_id = 1;
+	int32 correctAnswers = 2;
+	int32 currentQuestion = 3;
+}
+
+message QuestionRequest {
+  int32 user_id = 1;
+}
+
+message CleanUsers {
+}
+
+message AnswerResponse {
+  bool correct = 1;
+}
+
+
+message GameStart {
+	bool ready = 1;
+}
+
+message GameEnd {
+	bool victory = 1;	
+	bool defeat = 2;
+	bool draw = 3;
+	User user = 4;
+	User enemy = 5;
+}
+
+message Question {
+  int32 id = 1;
+  string text = 2;
+  repeated string options = 3;
+  string correctAnswer = 4;
+}
+
+message Answer {
+  int32 question_id = 1;
+  int32 user_id = 2;
+  string selected_option = 3;
+}

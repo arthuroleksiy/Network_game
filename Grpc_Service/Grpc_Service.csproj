@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Protos\game.proto" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EasyCaching.InMemory" Version="1.9.0" />
+    <PackageReference Include="Grpc.AspNetCore" Version="2.52.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Protobuf Include="Protos\game.proto" GrpcServices="Server" />
+  </ItemGroup>
+
+</Project>
